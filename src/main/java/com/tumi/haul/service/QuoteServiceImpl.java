@@ -73,7 +73,7 @@ public class QuoteServiceImpl implements QuoteService{
     public Quote acceptQuote(Long quoteId) {
         Quote quote = quoteRepository.findById(quoteId)
                 .orElseThrow(()-> new RuntimeException("Quote not found!"));
-clone
+clonegit-mgigi
 if (quote.getStatus() == QuoteStatus.PENDING){
     quote.setStatus(QuoteStatus.ACCEPTED);
      return quoteRepository.save(quote);
