@@ -5,6 +5,7 @@ public record QuoteResp(
         String ownerDetails,
         String status,
         String amount,
-        String availableDate
+        String availableDate,
+        String imageUrl
 ) {
 }

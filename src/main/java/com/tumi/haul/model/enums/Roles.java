@@ -7,7 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 public enum Roles implements GrantedAuthority {
 
     CLIENT(Const.CLIENT),
-    HAULER(Const.HAULER);
+    HAULER(Const.HAULER),
+    ADMIN(Const.ADMIN);
 
     private final String authority;
 
@@ -39,6 +40,7 @@ public enum Roles implements GrantedAuthority {
     public class Const {
         public static final String CLIENT = "CLIENT";
         public static final String HAULER = "HAULER";
+        public static final String ADMIN = "ADMIN";
     }
 }
 

@@ -1,10 +1,13 @@
 package com.tumi.haul.service.otpservice;
 
-import com.tumi.haul.security.jwt.JWTService;
+import com.tumi.haul.model.primitives.Email;
+import com.tumi.haul.service.emailservice.EmailService;
+import jakarta.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 import java.util.concurrent.ConcurrentHashMap;
 @Service
@@ -14,20 +17,18 @@ public class OtpService {
     private static final SecureRandom random = new SecureRandom();
     private static final Logger log = LoggerFactory.getLogger(OtpService.class);
     private final ConcurrentHashMap<String, String>otpStore = new ConcurrentHashMap<>();
+private EmailService emailService;
 
-
-
-    public String generatedOTPToDmd(String key){
+    public String generatedOTPToDmd(String key) throws MessagingException, UnsupportedEncodingException {
         StringBuilder otp = new StringBuilder(OTP_LENGTH);
         for (int i=0; i<OTP_LENGTH; i++){
             otp.append(random.nextInt(10));
         }
         otpStore.put(key, otp.toString());
-
-        log.info("This is the generated otp:{}",otp.toString());
+        log.info("This is the generated for:{}",otp + key);
         return otp.toString();
     }
-    /*
+/*
     public String generatedOTP(Email key){
         StringBuilder otp = new StringBuilder(OTP_LENGTH);
         for (int i=0; i<OTP_LENGTH; i++){
@@ -35,17 +36,13 @@ public class OtpService {
         }
         otpStore.put(String.valueOf(key), otp.toString());
         return otp.toString();
-    }*/
+   }*/
     public boolean validateOTP(String key, String otp){
-        log.info("Generated OTP for : {}", key);
         String storedOTP = otpStore.get(key);
-        log.info("this is the stored OTP:{}", storedOTP);
         if(storedOTP != null && storedOTP.equals(otp)){
-            log.info("Done");
             otpStore.remove(key);
             return true;
         }
-        log.info("not done");
         return false;
 
     }

@@ -1,7 +1,7 @@
 package com.tumi.haul.model.enums;
 
 public enum NotificationType {
-    JOB_UPDATE,
-    BID_ALERT,
+    QUOTE_STATUS,
+    QUOTE_ALERT,
     PAYMENT_METHOD
 }

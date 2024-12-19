@@ -1,9 +1,12 @@
 package com.tumi.haul.model.primitives;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Getter
 public class CreationDate implements Serializable {
     private final LocalDateTime value;
     public CreationDate(final LocalDateTime creationDate){
@@ -33,7 +36,4 @@ public class CreationDate implements Serializable {
                 '}';
     }
 
-    public LocalDateTime getValue() {
-        return value;
-    }
 }

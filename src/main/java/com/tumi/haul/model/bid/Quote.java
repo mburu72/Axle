@@ -1,40 +1,47 @@
 package com.tumi.haul.model.bid;
 
 
+import com.tumi.haul.model.converters.AmountConverter;
 import com.tumi.haul.model.converters.CreationDateConverter;
 import com.tumi.haul.model.enums.QuoteStatus;
 import com.tumi.haul.model.job.Job;
+import com.tumi.haul.model.primitives.Amount;
 import com.tumi.haul.model.primitives.CreationDate;
-import com.tumi.haul.model.user.Hauler;
+import com.tumi.haul.model.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Data
 @Entity
-@ToString
 @NoArgsConstructor
 @Table(name = "quotes")
 public class Quote implements Serializable {
     @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
+    @PrePersist
+    public void generateId(){
+        if (this.id == null){
+            this.id = "q_" + UUID.randomUUID().toString().substring(0, 8).toLowerCase();
+        }
+    }
     @ManyToOne
     private Job job;
     @ManyToOne
-    private Hauler hauler;
+    private User hauler;
     private String imageName;
     private String imageType;
     private String imageUrl;
-    private String quoteAmount;
-   @Enumerated(EnumType.STRING)
+    @Convert(converter = AmountConverter.class)
+    private Amount quoteAmount;
+    @Enumerated(EnumType.STRING)
     private QuoteStatus status= QuoteStatus.PENDING;
     @CreationTimestamp
     @Column(updatable = false)
@@ -44,7 +51,7 @@ public class Quote implements Serializable {
 
     private Quote(
 
-            final String quoteAmount,
+            final Amount quoteAmount,
             final String executionDate,
             final String imageName,
             final String imageType,

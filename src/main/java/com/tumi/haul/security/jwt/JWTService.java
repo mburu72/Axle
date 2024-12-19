@@ -1,23 +1,24 @@
 package com.tumi.haul.security.jwt;
 
-import com.tumi.haul.model.primitives.PhoneNumber;
+import com.tumi.haul.model.enums.Roles;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Component
@@ -30,12 +31,14 @@ public class JWTService{
         secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
     }
 
-    public String generateToken(PhoneNumber phoneNumber){
+    public String generateToken(String key, String id, Roles role){
         Map<String, Object>claims = new HashMap<>();
+        claims.put("id",id);
+        claims.put("role", role.getAuthority());
         return Jwts.builder()
                 .claims()
                 .add(claims)
-                .subject(phoneNumber.getValue())
+                .subject(key)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 20))
                 .and()
@@ -65,10 +68,9 @@ public class JWTService{
 
     public boolean validateToken(String jwt, UserDetails userDetails) {
         final String username = extractUsername(jwt);
-        log.info("username in jwt is :{} while username in userDetails is: {}", username);
-        log.warn("Username in userDetails is : {}", userDetails.getUsername());
         return (username.equals(userDetails.getUsername())&&!isTokenExpired(jwt));
     }
+
 
     private boolean isTokenExpired(String jwt) {
         return extractExpiration(jwt).before(new Date());
@@ -77,4 +79,17 @@ public class JWTService{
     private Date extractExpiration(String jwt) {
         return extractClaim(jwt, Claims::getExpiration);
     }
+   private Authentication getAuthentication(String jwt){
+        Claims claims = Jwts.parser()
+                .verifyWith(getKey())
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
+        String username = claims.getSubject();
+        String roleString = claims.get("role", String.class);
+       Roles role = Roles.fromAuthority(roleString);
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(role.getAuthority());
+        UserDetails userDetails = new User(username, "", authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+   }
 }

@@ -4,9 +4,9 @@ spring:
       name: user
       password: user
   application:
-    name: haul
+    name: axle
   datasource:
-    url: jdbc:mysql://localhost:3306/axle_db
+    url: jdbc:mysql://localhost:3306/axle_db_test
     driver-class-name: com.mysql.cj.jdbc.Driver
     db-kind: mysql
     username: root
@@ -16,16 +16,40 @@ spring:
       ddl-auto: update
       format_sql=true: true
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: edupablo72@gmail.com
-    password: ezwn xjyt gwrq agsd
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+token:
+  expiration-time-ms: 28800000  # 8 hours in milliseconds
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: edupablo72@gmail.com
+  password: ezwn xjyt gwrq agsd
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+image:
+  storage:
+    path: uploads/images
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

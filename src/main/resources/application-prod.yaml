@@ -1,0 +1,61 @@
+server:
+  port: 8443
+spring:
+  application:
+    name: axle
+  datasource:
+    url: jdbc:mysql://localhost:3306/axle_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+   # password: UWO@nwonknu
+    password: UWO@nwonknu1872!
+  jpa:
+    hibernate:
+      boot:
+        allow_jdbc_metadata_access: true
+      ddl-auto: update
+      format_sql: true
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+
+token:
+  expiration-time-ms: 28800000 # 8 hours in milliseconds
+
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: edupablo72@gmail.com
+  password: ezwn xjyt gwrq agsd
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+
+image:
+  storage:
+    path: /home/vmfqufyo/uploads/images
+
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    com.tumi.haul.controller: DEBUG
+    com.tumi.haul.model: DEBUG
+    root: INFO
+    org.springframework: INFO

@@ -1,7 +1,7 @@
 package com.tumi.haul.model.rating;
 
 import com.tumi.haul.model.job.Job;
-import com.tumi.haul.model.user.Client;
+import com.tumi.haul.model.user.User;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
@@ -15,9 +15,9 @@ public class Rating implements Serializable {
     @ManyToOne
     private Job job;
     @ManyToOne
-    private Client client;
+    private User client;
     @ManyToOne
-    private Client hauler;
+    private User hauler;
     private Integer rating;
     private String review;
     private Date ratingDate = new Date();

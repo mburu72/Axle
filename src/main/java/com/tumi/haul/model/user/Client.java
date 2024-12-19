@@ -1,9 +1,13 @@
 package com.tumi.haul.model.user;
 
-import com.tumi.haul.model.converters.*;
+import com.tumi.haul.model.converters.CreationDateConverter;
+import com.tumi.haul.model.converters.RoleConverter;
 import com.tumi.haul.model.enums.Roles;
 import com.tumi.haul.model.job.Job;
-import com.tumi.haul.model.primitives.*;
+import com.tumi.haul.model.primitives.CreationDate;
+import com.tumi.haul.model.primitives.Email;
+import com.tumi.haul.model.primitives.Name;
+import com.tumi.haul.model.primitives.PhoneNumber;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -11,59 +15,43 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.apache.commons.lang3.Validate.notNull;
-
+import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "clients")
 @Data
 @NoArgsConstructor(force = true)
-public class Client implements Serializable{
-
+public class Client extends BaseUser implements Serializable {
     @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Getter
-    @Convert(converter=NameConverter.class)
-    private Name firstName;
-    @Getter
-    @Convert(converter=NameConverter.class)
-    private Name lastName;
-    @Getter
-    @Convert(converter = PhoneNumberConverter.class)
-    private PhoneNumber phoneNumber;
-    @Getter
-    @Convert(converter = EmailConverter.class)
-    private Email email;
-    private String password;
-    @Convert(converter = RoleConverter.class)
-    private Role role;
+    private String id;
+    @PrePersist
+    public void generateId(){
+        if (this.id == null){
+            this.id = "c_" + UUID.randomUUID().toString().substring(0, 8).toLowerCase();
+        }
+    }
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Job> job;
-
+    @Convert(converter = RoleConverter.class)
+    private Roles role= Roles.CLIENT;
+    private String password = null;
     @CreationTimestamp
     @Column(updatable = false)
     @Convert(converter = CreationDateConverter.class)
     protected CreationDate creationDate;
-
     private Client(final Name firstName,
-                   final Name lastName,
-                   final PhoneNumber phoneNumber,
-                   final Email email,
-                   final String password,
-                   final Role role,
-                   final CreationDate creationDate) {
-        this.firstName = notNull(firstName);
-        this.lastName=notNull(lastName);
-        this.phoneNumber = notNull(phoneNumber);
-        this.email = email;
-        this.password=notNull(password);
-        this.role=role;
+                 final Name lastName,
+                 final PhoneNumber phoneNumber,
+                 final Email email,
+                 final String password,
+                 final boolean verified,
+                 final Roles role,
+                 final CreationDate creationDate) {
+        super(firstName, lastName, phoneNumber,creationDate, email, password, verified);
         this.creationDate = creationDate;
+        this.role = role;
     }
     @Override
     public boolean equals(Object o) {
@@ -74,9 +62,9 @@ public class Client implements Serializable{
     }
 
     public String toString(){
-        return "User{"+
-                "id='" + id +"name=" + firstName +lastName +"phoneNumber=" + phoneNumber +"email"+email+"role=" + role +
-                "creationDate=" + creationDate+"}";
+        return "Client{" +
+                "id='" + id + "', name=" + getFirstName() + " " + getLastName() +
+                ", phoneNumber=" + getPhoneNumber() + ", email=" + getEmail() + ", creationDate=" + creationDate + "}";
     }
 
 }

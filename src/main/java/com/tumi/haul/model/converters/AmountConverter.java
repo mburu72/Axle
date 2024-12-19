@@ -6,15 +6,15 @@ import jakarta.persistence.Converter;
 
 import java.math.BigDecimal;
 @Converter
-public class AmountConverter implements AttributeConverter<Amount, BigDecimal> {
+public class AmountConverter implements AttributeConverter<Amount, String> {
     @Override
-    public BigDecimal convertToDatabaseColumn(Amount amount) {
-        return amount.getValue();
+    public String convertToDatabaseColumn(Amount amount) {
+        return amount != null ? amount.toString() : null ;
     }
 
     @Override
-    public Amount convertToEntityAttribute(BigDecimal dbData) {
-        return new Amount(dbData);
+    public Amount convertToEntityAttribute(String dbData) {
+        return dbData != null ? new Amount(new BigDecimal(dbData)) : null;
     }
 
 }

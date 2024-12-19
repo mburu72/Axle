@@ -1,5 +1,7 @@
 package com.tumi.haul.security;
 
+import com.tumi.haul.model.admin.config.IpWhiteListFilter;
+import com.tumi.haul.model.enums.Roles;
 import com.tumi.haul.security.jwt.JWTFilter;
 import com.tumi.haul.security.jwt.JwtAuthEntryPoint;
 import org.slf4j.Logger;
@@ -10,11 +12,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,7 +34,6 @@ import java.util.List;
 public class SecurityConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
-    private final JwtAuthEntryPoint jwtAuthEntryPoint;
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -41,13 +41,14 @@ public class SecurityConfig {
 
 @Autowired
     public SecurityConfig(JwtAuthEntryPoint jwtAuthEntryPoint) {
-        this.jwtAuthEntryPoint = jwtAuthEntryPoint;
 
-    }
+}
+@Autowired
+private IpWhiteListFilter whiteListFilter;
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of("https://axle-ke.co.ke", "http://localhost:5173","http://localhost:3000", "/ws/**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Include OPTIONS for preflight
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
@@ -57,29 +58,31 @@ public class SecurityConfig {
     }
 
     @Bean
-   public SecurityFilterChain securityFilterChain(HttpSecurity https) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity https) throws Exception{
         return https
+                .addFilterBefore(whiteListFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth)->auth
+                        .requestMatchers("/admin/***").hasRole(Roles.ADMIN.getAuthority())
                         .requestMatchers(
-                                "/api/v1/users/login",
-                                "/api/v1/users/{phoneNumber}/request-otp",
-                                "/api/v1/users/{phoneNumber}/{otp}/verify-otp",
-                                "/api/v1/jobs/{clientId}/new",
-                                "/api/v1/jobs/{clientId}/jobs",
-                                "/api/v1/jobs/add",
-                                "/api/quotes/**",
-                                "/api/v1/jobs/{id}",
+                                "/api/pay-now/**",
+                                "/api/payment/pay-now",
+                                "/actuator/health",
+                                "/api/v1/users/{username}/request-otp",
+                                "/api/v1/users/{username}/{otp}/verify-otp",
+                                "/api/v1/users/{phoneNumber}/{otp}/verify-user",
+                                "/api/v1/users/{email}/{otp}/registration",
+                                "/api/v1/users/{email}/{otp}/client",
+                                "/api/images/**",
                                 "/api/v1/auth/**",
-                                "/api/v1/users/clients",
-                                "/api/v1/users/register",
+                                "/api/v1/jobs/**",
+                                "/api/v1/email",
                                 "/api/v1/users/verify-otp").permitAll()
 
                         .anyRequest().authenticated())
-
-                        .sessionManagement(session ->
-                                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
@@ -88,6 +91,7 @@ public class SecurityConfig {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
         provider.setUserDetailsService(userDetailsService);
+
         return provider;
 
     }
