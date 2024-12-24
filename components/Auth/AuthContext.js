@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { jwtDecode } from 'jwt-decode'; 
-import axiosInstance from '@/pages/api/axiosinstance';
+import axiosInstance from '../../pages/api/axiosinstance'
 import Cookies from 'js-cookie';
 const AuthContext = createContext();
 
