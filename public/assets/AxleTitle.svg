@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="148" height="76" viewBox="0 0 148 76" fill="none" stroke="none" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter color-interpolation-filters="sRGB" x="-134" y="-62" width="136" height="64" id="filter_1">
+      <feFlood flood-opacity="0" result="BackgroundImageFix_1" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="SourceAlpha" />
+      <feOffset dx="0" dy="2" />
+      <feGaussianBlur stdDeviation="2.4" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.392 0 0 0 0 0.392 0 0 0 0 0.392 0 0 0 0.498 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix_1" result="Shadow_2" />
+      <feBlend mode="normal" in="SourceGraphic" in2="Shadow_2" result="Shape_3" />
+    </filter>
+  </defs>
+  <g style="filter:url(#filter_1);mix-blend-mode:normal;" transform="translate(6 4)">
+    <g>
+      <path d="M32.625 47.8125L14.4688 47.8125L8.96875 57.9375L-0.71875 57.9375L25.1875 12.125L35.6562 12.125L43.0938 57.9375L34.1562 57.9375L32.625 47.8125ZM31.4688 40.1875L28.8125 21.75L17.75 40.1875L31.4688 40.1875ZM64.0625 48.625L55.8125 57.9375L44.8125 57.9375L60.1562 40.9375L51.7188 24.75L61.25 24.75L66.0938 34.2188L74.5 24.75L85.4062 24.75L70 41.9688L78.375 57.9375L68.8438 57.9375L64.0625 48.625ZM84.3125 57.9375L93.9062 12.125L102.844 12.125L93.2812 57.9375L84.3125 57.9375ZM134.469 44.125L111.969 44.125Q111.938 44.6562 111.938 44.9375Q111.938 48.25 113.828 50.2812Q115.719 52.3125 118.438 52.3125Q122.906 52.3125 125.406 47.6875L133.438 49.0312Q131.094 53.875 127.172 56.2969Q123.25 58.7188 118.375 58.7188Q111.688 58.7188 107.5 54.4844Q103.312 50.25 103.312 43.2812Q103.312 36.4688 107.094 31.1562Q112.25 23.9688 121.812 23.9688Q127.906 23.9688 131.5 27.7344Q135.094 31.5 135.094 38.2812Q135.094 41.5312 134.469 44.125ZM126.906 38.6562Q126.938 38.0625 126.938 37.75Q126.938 34.0625 125.281 32.2188Q123.625 30.375 120.844 30.375Q118.062 30.375 115.859 32.4688Q113.656 34.5625 112.875 38.6562L126.906 38.6562Z" transform="translate(0 -4.797)" style="fill:#1E40AF;" />
+    </g>
+  </g>
+</svg>

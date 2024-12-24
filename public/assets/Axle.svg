@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="90.5" height="70.5" viewBox="0 0 90.5 70.5" fill="none" stroke="none" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="Group" transform="translate(0.5 0.5)">
+    <path id="Vector" d="M44.1315 59.4579L0 59.4579L0 59.4579L4 51L28.5 51L0 8L6 0L44.1315 59.4579Z" style="fill:none;stroke-width:1;stroke:#1E40AF;mix-blend-mode:normal;" transform="translate(40 0)" />
+    <g style="mix-blend-mode:normal;" transform="translate(16 32)">
+      <path id="Vector" d="M23.3847 0L0 37.1333L74 37.1333L69.5 29.6333L16 29.6333L29 10.6333L23.3847 0Z" />
+      <path d="M16.6842 28.6333L29 10.6333L23.9237 1.02068L23.3847 0L22.7696 0.976715L0.629749 36.1333L0 37.1333L74 37.1333L73.4 36.1333L69.5 29.6333L16 29.6333L16.6842 28.6333ZM68.9338 30.6333L14.1041 30.6333L27.8339 10.5667L23.3086 1.99739L1.81152 36.1333L72.2338 36.1333L68.9338 30.6333Z" fill-rule="evenodd" style="fill:#1E40AF;fill-rule:evenodd;" />
+    </g>
+    <path id="Vector" d="M38.1702 17.7211L51 36.5L62 36.5L38.1702 0L0 58.5L13 58.5L38.1702 17.7211Z" style="fill:none;stroke-width:1;stroke:#1E40AF;mix-blend-mode:normal;" transform="translate(0 11)" />
+  </g>
+</svg>
