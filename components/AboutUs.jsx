@@ -1,13 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react';
-import JobCreationCard from '../components/util/client/JobCreationCard';
+import JobCreationCard from './util/client/JobCreationCard';
 import { faMailBulk, faMailReply, faPhone, faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faMailchimp, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-
-
-
 const AboutUs = () => {
   const [bgIndex, setBgIndex] = useState(0);
   const backgrounds = [
@@ -214,10 +211,11 @@ const AboutUs = () => {
           <div className="absolute inset-0 bg-black bg-opacity-50 "></div>
           {/* Overlay Content */}
           <div className="relative z-10 text-center text-white px-4 sm:px-0">
+          
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Welcome to Axle Logistics</h2>
             <p className="text-base sm:text-lg md:text-2xl mt-4">
             Providing end-to-end logistics solutions for all your transportation needs. From agricultural goods to industrial materials, we ensure reliable, efficient service every time.
-            </p>
+         </p>  
           </div>
 
           {/* Scroll Down Arrow */}
@@ -230,40 +228,31 @@ const AboutUs = () => {
         <section id='services' className='md:w-1/2 mx-auto my-8 px-2 text-center'>
   <h1 className='text-2xl md:text-3xl font-semibold text-blue-800 mb-2 text-center'>Our Services</h1>
   <div className='flex flex-col md:flex-row'>
-    <div className='rounded-lg py-4 px-2 m-2 border border-sky-900 shadow shadow-lg flex flex-col flex-1'>
-      <h1 className='text-xl text-rose-800 font-bold'>General Haulage Services</h1>
-      <p className='mb-2 flex-grow'>We provide reliable transport for everything from agricultural goods to industrial materials.</p>
-      <a href='/newjob' className='text-green-900 m-2 p-2 mb-4 font-bold rounded-lg border border-green-900'>Get a quote now</a>
-    </div>
-    <div className='rounded-lg py-4 px-2 m-2 border border-sky-900 shadow shadow-lg flex flex-col flex-1'>
-      <h1 className='text-xl text-rose-800 font-bold'>Residential Moving</h1>
-      <p className='mb-2 flex-grow'>Are you moving to a new house?<br /> Let us handle the stressful part of moving and rearranging.</p>
-      <a href='/residential' className='text-green-900 m-2 p-2 mb-4 font-bold rounded-lg border border-green-900'>Get a quote now</a>
-    </div>
-    <div className='rounded-lg py-4 px-2 m-2 border border-sky-900 shadow shadow-lg flex flex-col flex-1'>
-      <h1 className='text-xl text-rose-800 font-bold'>Commercial Moving</h1>
-      <p className='mb-2 flex-grow'>Moving your office to another location?<br /> Let us handle the stressful part of moving and rearranging.</p>
-      <a href='/commercial' className='text-green-900 m-2 p-2 mb-4 font-bold rounded-lg border border-green-900'>Get a quote now</a>
+    <div className='rounded-lg py-4 px-2 m-2 bg-sky-900 shadow shadow-lg flex flex-col flex-1'>
+      <h1 className='text-xl text-black font-bold'>General Haulage Services</h1>
+      <p className='mb-2 flex-grow text-white'>Whether you need to move heavy cargo from ports to warehouses or deliver essential supplies to farms, our reliable and efficient logistics solutions are tailored to meet your needs. With a commitment to safety, timeliness, and professionalism, we ensure your goods are handled with care every step of the way.</p>
+      <a href='/newjob' className='md:w-1/2 mx-auto m-2 p-2 mb-4 font-bold rounded-lg border border-white text-rose-800'>Get a quote now</a>
     </div>
   </div>
 </section>
 
         <section className="my-8 px-4 sm:px-6 text-center md:w-1/2 mx-auto">
 
-          <h2 className="text-2xl md:text-3xl font-semibold text-green-900 mb-6">Our Mission & Vision</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold text-blue-800 mb-6">Our Mission & Vision</h2>
+          
           <div className="bg-sky-900 p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold text-rose-800">Mission</h3>
+            <h3 className="text-xl font-semibold text-black">Mission</h3>
             <p className="text-white mb-6">
               To provide reliable and efficient transportation solutions that empower businesses and individuals across Kenya and East Africa, fostering connections and facilitating trade.
             </p>
-            <h3 className="text-xl font-semibold text-rose-800">Vision</h3>
+            <h3 className="text-xl font-semibold text-black">Vision</h3>
             <p className="text-white">
               To be the leading transportation platform in East Africa, revolutionizing logistics through technology and community engagement, ensuring safe and timely deliveries for all.
             </p>
           </div>
         </section>
 
-        <section id="why-choose-us" className="my-8 px-4 sm:px-6 bg-white py-2">
+        <section id="why-choose-us" className="my-8 px-4 sm:px-6  py-2">
           <h2 className="text-2xl md:text-3xl font-semibold text-rose-800 mb-6 text-center">Why Choose Axle?</h2>
           <div className='flex flex-col md:flex-row' >
             {/* Reliable Drivers */}
@@ -354,7 +343,7 @@ const AboutUs = () => {
                 </div>
               </div>
               <div className="flex items-start mb-4 md:mb-0">
-                <img src='/icons/three-open-svgrepo-com.svg' alt="Step 4" className="w-10 h-10 mr-4" />
+                <img src='/icons/number3-svgrepo-com.svg' alt="Step 4" className="w-10 h-10 mr-4" />
                 <div>
                   <h3 className="text-lg font-semibold text-sky-800">4. Sit Back & Relax</h3>
                   <p className="text-gray-700">Sit back and relax as we deliver your goods to the desired destination.</p>
@@ -387,12 +376,10 @@ const AboutUs = () => {
           </a>
         </div>
         <footer className="m-auto">
-          <div className="md:flex md:flex-row md:justify-between md:px-4 py-2 px-2 border-t-2 border-t-black md:justify-between">
-            <span className="flex flex-col w-3/4 my-2 items-start">
+          <div className="md:flex md:flex-row md:justify-between md:px-4 md:w-3/4 md:mx-auto py-2 px-2 border-t-2 border-t-black md:justify-between">
+            <span className="flex flex-col   my-2 items-start">
               <h1 className="text-sky-900 font-bold">Services</h1>
               <a className='' href='/newjob'>General Haulage</a>
-              <a className='' href='/residential'>Residential Moving</a>
-              <a className='' href='/commercial'>Commercial Moving</a>
             </span>
             <span className="flex flex-col items-start">
               <h1 className="text-sky-900 font-bold">Contact Us</h1>

@@ -18,9 +18,11 @@ export const metadata: Metadata = {
     default: "Axle Logistics Kenya",
     template: `%s | Axle Logistics Kenya`,
   },
-  openGraph: {
-    description: "Quality logistics services."
-  }
+  twitter:{
+    card: "summary_large_image"
+  },
+  description: "Quality logistics services."
+
 };
 
 export default function RootLayout({

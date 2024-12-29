@@ -9,6 +9,7 @@ const JobDetailsScreen = () => {
     const [job, setJob] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+console.log(id);
 
     // Function to go to the previous image
     const prevImage = () => {
