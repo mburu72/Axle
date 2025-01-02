@@ -251,7 +251,7 @@ const AboutUs = () => {
             </p>
           </div>
         </section>
-
+<a href='/splash'>Here</a>
         <section id="why-choose-us" className="my-8 px-4 sm:px-6  py-2">
           <h2 className="text-2xl md:text-3xl font-semibold text-rose-800 mb-6 text-center">Why Choose Axle?</h2>
           <div className='flex flex-col md:flex-row' >
