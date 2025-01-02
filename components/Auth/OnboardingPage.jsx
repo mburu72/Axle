@@ -19,9 +19,24 @@ const OnboardingPage = () => {
   const [errors, setErrors] = useState({});
   const router = useRouter();
 
+  // Utility function to capitalize name
+  const capitalizeName = (name) => {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  };
+
+  // Handle changes in input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    
+    // Capitalize names and lowercase email
+    if (name === "firstName" || name === "lastName") {
+      setUser({ ...user, [name]: capitalizeName(value) });
+    } else if (name === "email") {
+      setUser({ ...user, [name]: value.toLowerCase() });
+    } else {
+      setUser({ ...user, [name]: value });
+    }
   };
 
   const handleUserTypeChange = (type) => {
