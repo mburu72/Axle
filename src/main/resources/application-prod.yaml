@@ -4,11 +4,11 @@ spring:
   application:
     name: axle
   datasource:
-    url: jdbc:mysql://localhost:3306/axle_db
+    url: 
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-   # password: UWO@nwonknu
-    password: UWO@nwonknu1872!
+   # password:
+    password:
   jpa:
     hibernate:
       boot:
@@ -31,8 +31,8 @@ token:
 mail:
   host: smtp.gmail.com
   port: 587
-  username: edupablo72@gmail.com
-  password: ezwn xjyt gwrq agsd
+  username:
+  password:
   properties:
     mail:
       smtp:
@@ -42,7 +42,7 @@ mail:
 
 image:
   storage:
-    path: /home/vmfqufyo/uploads/images
+    path:
 
 
 
