@@ -1,16 +1,16 @@
 spring:
   security:
     user:
-      name: user
-      password: user
+      name: 
+      password: 
   application:
     name: axle
   datasource:
-    url: jdbc:mysql://localhost:3306/axle_db_test
+    url: 
     driver-class-name: com.mysql.cj.jdbc.Driver
     db-kind: mysql
-    username: root
-    password: UWO@nwonknu
+    username:
+    password:
   jpa:
     hibernate:
       ddl-auto: update
@@ -34,10 +34,10 @@ spring:
 token:
   expiration-time-ms: 28800000  # 8 hours in milliseconds
 mail:
-  host: smtp.gmail.com
-  port: 587
-  username: edupablo72@gmail.com
-  password: ezwn xjyt gwrq agsd
+  host:
+  port:
+  username:
+  password:
   properties:
     mail:
       smtp:
