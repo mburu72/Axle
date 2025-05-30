@@ -48,7 +48,7 @@ private IpWhiteListFilter whiteListFilter;
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://axle-ke.co.ke", "http://localhost:5173","http://localhost:3000", "/ws/**"));
+        configuration.setAllowedOrigins(List.of( "http://localhost:5173","http://localhost:3000", "/ws/**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Include OPTIONS for preflight
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
